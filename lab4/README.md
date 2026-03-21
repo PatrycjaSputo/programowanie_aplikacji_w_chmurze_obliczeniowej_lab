@@ -27,3 +27,10 @@ Wynik polecenia `docker history patrycjasputo/web100:1.0.0`:
 
 Z wyniku tego polecenia wynika, że obraz ma 3 warstwy, ponieważ tylko 3 z nich mają niezerowe wpisy.
 
+# Etap 3
+
+Zalogowano do Docker Hub komendą `docker login`.
+Wysłano obraz na Docker Hub za pomocą komendy `docker push patrycjasputo/web100:1.0.0`.
+
+
+
