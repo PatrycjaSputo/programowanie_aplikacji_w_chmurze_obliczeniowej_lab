@@ -1,2 +1,2 @@
 # programowanie_aplikacji_w_chmurze_obliczeniowej_lab
-Rozwiązania zadań do laboratorów z dockera.
+Rozwiązania zadań do laboratoriów z dockera.
