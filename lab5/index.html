@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorium 5</title>
+</head>
+<body>
+    <h1>Laboratorium 5</h1>
+    <p><b>Wersja aplikacji:</b> <span id="ver"></span></p>
+    <p><b>Nazwa serwera:</b> <span id="hostname"></span></p>
+    <p><b>Adres IP:</b> <span id="ip"></span></p>
+
+    <script>   
+        
+        fetch('config.json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('ver').innerText = data.version;
+                document.getElementById('ip').innerText = data.ip;
+                document.getElementById('hostname').innerText = data.hostname;
+            })
+            .catch(err => console.error("Błąd ładowania JSON:", err));
+
+    </script>
+</body>
+</html>
