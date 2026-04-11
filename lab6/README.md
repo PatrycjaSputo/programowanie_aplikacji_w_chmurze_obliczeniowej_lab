@@ -61,40 +61,40 @@ Wykorzystanie mountowania SSH.
 
 # ETAP 4
 
-patrycja@patrycja-GL65-9SE:~/studia/chmura/lab_5$ docker build --ssh default --build-arg VERSION=1.0 -t ghcr.io/patrycjasputo/pawcho6:lab6 .
-[+] Building 2.6s (20/20) FINISHED                               docker:default
- => [internal] load build definition from Dockerfile                       0.0s
- => => transferring dockerfile: 1.04kB                                     0.0s
- => resolve image config for docker-image://docker.io/docker/dockerfile:1  1.8s
- => [auth] docker/dockerfile:pull token for registry-1.docker.io           0.0s
- => CACHED docker-image://docker.io/docker/dockerfile:1@sha256:2780b5c3ba  0.0s
- => => resolve docker.io/docker/dockerfile:1@sha256:2780b5c3bab67f1f76c78  0.0s
- => [internal] load metadata for docker.io/library/alpine:3.21             0.6s
- => [internal] load metadata for docker.io/library/nginx:1.28.3-alpine     0.6s
- => [auth] library/alpine:pull token for registry-1.docker.io              0.0s
- => [auth] library/nginx:pull token for registry-1.docker.io               0.0s
- => [internal] load .dockerignore                                          0.0s
- => => transferring context: 2B                                            0.0s
- => [builder 1/5] FROM docker.io/library/alpine:3.21@sha256:c3f8e73fdb79d  0.0s
- => => resolve docker.io/library/alpine:3.21@sha256:c3f8e73fdb79deaebaa20  0.0s
- => [stage-1 1/5] FROM docker.io/library/nginx:1.28.3-alpine@sha256:a8b39  0.0s
- => => resolve docker.io/library/nginx:1.28.3-alpine@sha256:a8b39bd9cf0f8  0.0s
- => CACHED [builder 2/5] RUN apk add --no-cache git openssh-client         0.0s
- => CACHED [builder 3/5] RUN mkdir -p -m 0700 ~/.ssh && ssh-keyscan githu  0.0s
- => CACHED [builder 4/5] WORKDIR /app                                      0.0s
- => CACHED [builder 5/5] RUN --mount=type=ssh git clone git@github.com:Pa  0.0s
- => CACHED [stage-1 2/5] COPY --from=builder /app/index.html /usr/share/n  0.0s
- => CACHED [stage-1 3/5] COPY --from=builder /app/config.template.json /a  0.0s
- => CACHED [stage-1 4/5] COPY --from=builder /app/start.sh /start.sh       0.0s
- => CACHED [stage-1 5/5] RUN chmod +x /start.sh                            0.0s
- => exporting to image                                                     0.0s
- => => exporting layers                                                    0.0s
- => => exporting manifest sha256:dfd0467a72e80b9d13f8cd8c40fbeb666fdf677e  0.0s
- => => exporting config sha256:e6a82a144ed2f06bf19a036af3bfd2f09568d83bfc  0.0s
- => => exporting attestation manifest sha256:074a540c69a63cfffd7664493391  0.0s
- => => exporting manifest list sha256:2c315e395db8625203a5ad9e3b596b283bf  0.0s
- => => naming to ghcr.io/patrycjasputo/pawcho6:lab6                        0.0s
- => => unpacking to ghcr.io/patrycjasputo/pawcho6:lab6                     0.0s
+    patrycja@patrycja-GL65-9SE:~/studia/chmura/lab_5$ docker build --ssh default --build-arg VERSION=1.0 -t ghcr.io/patrycjasputo/pawcho6:lab6 .
+    [+] Building 2.6s (20/20) FINISHED                               docker:default
+     => [internal] load build definition from Dockerfile                       0.0s
+     => => transferring dockerfile: 1.04kB                                     0.0s
+     => resolve image config for docker-image://docker.io/docker/dockerfile:1  1.8s
+     => [auth] docker/dockerfile:pull token for registry-1.docker.io           0.0s
+     => CACHED docker-image://docker.io/docker/dockerfile:1@sha256:2780b5c3ba  0.0s
+     => => resolve docker.io/docker/dockerfile:1@sha256:2780b5c3bab67f1f76c78  0.0s
+     => [internal] load metadata for docker.io/library/alpine:3.21             0.6s
+     => [internal] load metadata for docker.io/library/nginx:1.28.3-alpine     0.6s
+     => [auth] library/alpine:pull token for registry-1.docker.io              0.0s
+     => [auth] library/nginx:pull token for registry-1.docker.io               0.0s
+     => [internal] load .dockerignore                                          0.0s
+     => => transferring context: 2B                                            0.0s
+     => [builder 1/5] FROM docker.io/library/alpine:3.21@sha256:c3f8e73fdb79d  0.0s
+     => => resolve docker.io/library/alpine:3.21@sha256:c3f8e73fdb79deaebaa20  0.0s
+     => [stage-1 1/5] FROM docker.io/library/nginx:1.28.3-alpine@sha256:a8b39  0.0s
+     => => resolve docker.io/library/nginx:1.28.3-alpine@sha256:a8b39bd9cf0f8  0.0s
+     => CACHED [builder 2/5] RUN apk add --no-cache git openssh-client         0.0s
+     => CACHED [builder 3/5] RUN mkdir -p -m 0700 ~/.ssh && ssh-keyscan githu  0.0s
+     => CACHED [builder 4/5] WORKDIR /app                                      0.0s
+     => CACHED [builder 5/5] RUN --mount=type=ssh git clone git@github.com:Pa  0.0s
+     => CACHED [stage-1 2/5] COPY --from=builder /app/index.html /usr/share/n  0.0s
+     => CACHED [stage-1 3/5] COPY --from=builder /app/config.template.json /a  0.0s
+     => CACHED [stage-1 4/5] COPY --from=builder /app/start.sh /start.sh       0.0s
+     => CACHED [stage-1 5/5] RUN chmod +x /start.sh                            0.0s
+     => exporting to image                                                     0.0s
+     => => exporting layers                                                    0.0s
+     => => exporting manifest sha256:dfd0467a72e80b9d13f8cd8c40fbeb666fdf677e  0.0s
+     => => exporting config sha256:e6a82a144ed2f06bf19a036af3bfd2f09568d83bfc  0.0s
+     => => exporting attestation manifest sha256:074a540c69a63cfffd7664493391  0.0s
+     => => exporting manifest list sha256:2c315e395db8625203a5ad9e3b596b283bf  0.0s
+     => => naming to ghcr.io/patrycjasputo/pawcho6:lab6                        0.0s
+     => => unpacking to ghcr.io/patrycjasputo/pawcho6:lab6                     0.0s
 
 View build details: docker-desktop://dashboard/build/default/default/8e9r6yo4apxxxpnyhq3dzns09
 
