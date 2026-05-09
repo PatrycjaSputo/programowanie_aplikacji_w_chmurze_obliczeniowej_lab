@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pogoda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Sprawdź pogodę</h2>
+
+        <div class="countrySection">
+            <label for="country">Wybierz kraj:</label><br><br>
+
+            <select id="country" style="width: 100%; padding: 5px;">
+
+            </select><br><br>
+        </div>
+
+        <div class="citySection" style="visibility: hidden;">
+            <label for="city">Wybierz miasto:</label><br><br>
+
+            <select id="city" style="width: 100%; padding: 5px;">
+
+            </select><br><br>
+        </div>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        var data = null
+        function fetchWeather(lat, lon, countryName, cityName) {
+            const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+
+            fetch(apiUrl)
+                .then(res => res.json())
+                .then(json => {
+                    const temp = json.current_weather.temperature;
+                    const wind = json.current_weather.windspeed;
+
+                    const resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = `
+                        <h3>Pogoda dla: ${cityName} (${countryName})</h3>
+                        <p><strong>Temperatura:</strong> ${temp} °C</p>
+                        <p><strong>Wiatr:</strong> ${wind} km/h</p>
+                    `;
+                })
+                .catch(err => alert("Błąd pobierania danych!"));
+        }
+
+        async function fetchJSONData(fileName) {
+            try {
+                const response = await fetch(fileName);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return await response.json();
+            } catch (error) {
+                console.error('Błąd wczytywania danych:', error);
+            }
+        }
+
+        function showSelectCountries() {
+            if (!data) return -1;
+
+            // Opcja domyślna dla krajów
+            let options = "<option value='' disabled selected>Wybierz kraj...</option>";
+
+            for (let i = 0; i < data.length; i++) {
+                options += "<option value='" + i + "'>" + data[i]["kraj"] + "</option>";
+            }
+            document.getElementById('country').innerHTML = options;
+        }
+
+        function showSelectCities(countryId) {
+            if (!data[countryId]) return -1;
+
+            // Opcja domyślna dla miast
+            let options = "<option value='' disabled selected>Wybierz miasto...</option>";
+
+            for (let i = 0; i < data[countryId]["miasta"].length; i++) {
+                options += "<option value='" + i + "'>" + data[countryId]["miasta"][i]["nazwa"] + "</option>";
+            }
+            document.getElementById('city').innerHTML = options;
+        }
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            data = await fetchJSONData('./miasta.json');
+            showSelectCountries();
+        });
+
+        document.getElementById('country').addEventListener('change', function () {
+            document.getElementById('result').innerHTML = "";
+            let res = showSelectCities(document.getElementById('country').value);
+            if (res !== -1) document.querySelector('.citySection').style.visibility = "visible";
+        });
+
+        document.getElementById('city').addEventListener('change', function () {
+            let countryId = document.getElementById('country').value;
+            let cityId = document.getElementById('city').value;
+            let cityElement = data[countryId]["miasta"][cityId];
+            fetchWeather(cityElement['lat'], cityElement['lon'], data[countryId]['kraj'], cityElement['nazwa']);
+
+        })
+    </script>
+</body>
+
+</html>
