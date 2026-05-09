@@ -41,12 +41,13 @@ patrycjasputo/pogoda:v1   892b07a5792f        660kB          308kB
 
 ```
 
-# CZĘŚĆ DODATKOWA
+# CZĘŚĆ DODATKOWA (3)
 
 Stworzenie buildera: 
 
 `docker buildx create --name builder1 --driver docker-container --use`
 
+Zmienna GIT_BRANCH może zostać pominięta, gdy pliki znajdują się na gałęzi main.
 Zbudowanie obrazu (logi CACHED potwierdzaja użycie cache):
 
 ```
