@@ -224,5 +224,30 @@ Phpmyadmin - użytkownik zalogowany.
 Dodanie folderu `secrets/` i dodanie go do `.gitignore`.
 W secrets zostały umieszczone dane wrażliwe.
 
+W `docker-comose.yml` zostały użyte secret'y w następujący sposób:
+
+* Na dole pliku dodano nazwy wraz ze ścieżkami do plików:
+    ```
+    secrets:
+        db_root_password:
+            file: ./secrets/db_root_password
+        db_name:
+            file: ./secrets/db_name
+    ```
+* Przy usłudze mysql dodano sekcję sectrets:
+    ```
+    secrets: 
+        - db_root_password
+        - db_name
+    ```
+* Dodano zmienne do kontenera mysql:
+    ```
+    environment:
+        MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+        MYSQL_DATABASE_FILE: /run/secrets/db_name
+    ```
+
+
+
 
 
