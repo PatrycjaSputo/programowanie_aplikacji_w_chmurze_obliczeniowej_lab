@@ -2,7 +2,7 @@
 Zbudowanie prostego pliku docker-compose.yml, który pozwoli na uruchomienie stack-a LEMP wraz z phpMyAdmin.
 ## Część obowiązkowa
 
-Początkowo (w części obowiązkowej zadania) dane wrażliwe zostały dodane do pliky .env.
+Początkowo (w części obowiązkowej zadania) dane wrażliwe zostały dodane do pliku .env.
 
 **Komenda uruchamiająca kontenery:** `docker compose up -d`.
 
@@ -59,7 +59,7 @@ e360095edbff   mysql:9.7.0                     "docker-entrypoint.s…"   11 min
 
 #### Wyjaśnienie sposobu przyłączenia phpMyAdmin do sieci
 
-Mikrousługa `phpMyAdmin` została podłączona wyłącznie do sieci `backend`. Wynika to z faktu, że jej jedynym zadaniem jest bezpośrednia komunikacja z serwerem bazy danych MySQL, który znajduje się tylko w sieci `backend` w celu izolacji od ruchu z zewnątrz. Wystawienie portu `6001:80` w pliku `docker-compose.yml` realizuje mapowanie portów z hosta na kontener i umożliwia dostęp do interfejsu z poziomu przeglądarki użytkownika. Przypinanie phpMyAdmin do sieci `frontend` łamałoby zasady separacji warstw.
+Mikrousługa `phpMyAdmin` została podłączona wyłącznie do sieci `backend`. Wynika to z faktu, że jej jedynym zadaniem jest bezpośrednia komunikacja z serwerem bazy danych MySQL, który znajduje się tylko w sieci `backend` w celu izolacji od ruchu z zewnątrz. Wystawienie portu `6001:80` w pliku `docker-compose.yml` realizuje mapowanie portów z hosta na kontener i umożliwia dostęp do interfejsu z poziomu przeglądarki użytkownika. Przyłączenie phpMyAdmin do sieci `frontend` łamałoby zasady separacji warstw.
 
 **Sprawdzenie poprawności konfiguracji sieci:**
 
@@ -233,7 +233,7 @@ Phpmyadmin - użytkownik zalogowany.
 Dodanie folderu `secrets/` i dodanie go do `.gitignore`.
 W secrets zostały umieszczone dane wrażliwe.
 
-W `docker-comose.yml` zostały użyte secret'y w następujący sposób:
+W `docker-compose.yml` zostały użyte secret'y w następujący sposób:
 
 * Na dole pliku dodano nazwy wraz ze ścieżkami do plików:
     ```
