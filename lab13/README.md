@@ -1,4 +1,8 @@
-# Lab13 - część obowiązkowa
+# Lab13 - część obowiązkowa i dodatkowa
+Zbudowanie prostego pliku docker-compose.yml, który pozwoli na uruchomienie stack-a LEMP wraz z phpMyAdmin.
+## Część obowiązkowa
+
+Początkowo (w części obowiązkowej zadania) dane wrażliwe zostały dodane do pliky .env.
 
 **Komenda uruchamiająca kontenery:** `docker compose up -d`.
 
@@ -40,7 +44,7 @@
 
 **Phpmyadmin:** http://localhost:6001/
 
-## Potwierdzenie działania kontenerów
+### Potwierdzenie działania kontenerów
 
 `docker ps`
 ```
@@ -50,7 +54,7 @@ CONTAINER ID   IMAGE                           COMMAND                  CREATED 
 37ae4dfead90   php:8.2-fpm-alpine              "docker-php-entrypoi…"   11 minutes ago   Up 10 minutes   9000/tcp                                  lab13-php-1
 e360095edbff   mysql:9.7.0                     "docker-entrypoint.s…"   11 minutes ago   Up 10 minutes   3306/tcp, 33060/tcp                       lab13-mysql-1
 ```
-## Potwierdzenie działania sieci
+### Potwierdzenie działania sieci
 
 `docker network inspect lab13_backend`
 <details>
@@ -202,16 +206,23 @@ e360095edbff   mysql:9.7.0                     "docker-entrypoint.s…"   11 min
 
 </details>
 
-## Potwierdzenie działania strony
+### Potwierdzenie działania strony
 
 ![strona](img/1.png)
 Strona index.php
 
-## Potwierdzenie działania phpmyadmin
+### Potwierdzenie działania phpmyadmin
 
 ![phpmyadmin](img/2.png)
 Logowanie do phpmyadmin
 
 ![phpmyadmin](img/3.png)
 Phpmyadmin - użytkownik zalogowany.
+
+## Część dodatkowa
+
+Dodanie folderu `secrets/` i dodanie go do `.gitignore`.
+W secrets zostały umieszczone dane wrażliwe.
+
+
 

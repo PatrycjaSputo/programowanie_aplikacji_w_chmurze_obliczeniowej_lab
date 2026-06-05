@@ -22,12 +22,15 @@ services:
   mysql:
     image: mysql:9.7.0
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      MYSQL_DATABASE_FILE: /run/secrets/db_name
     networks:
       - backend
     volumes:
       - db_data:/var/lib/mysql
+    secrets: 
+      - db_root_password
+      - db_name
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5.2
@@ -46,3 +49,9 @@ networks:
 
 volumes:
   db_data:
+
+secrets:
+  db_root_password:
+    file: ./secrets/db_root_password
+  db_name:
+    file: ./secrets/db_name
