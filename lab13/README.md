@@ -56,6 +56,13 @@ e360095edbff   mysql:9.7.0                     "docker-entrypoint.s…"   11 min
 ```
 ### Potwierdzenie działania sieci
 
+
+#### Wyjaśnienie sposobu przyłączenia phpMyAdmin do sieci
+
+Mikrousługa `phpMyAdmin` została podłączona wyłącznie do sieci `backend`. Wynika to z faktu, że jej jedynym zadaniem jest bezpośrednia komunikacja z serwerem bazy danych MySQL, który znajduje się tylko w sieci `backend` w celu izolacji od ruchu z zewnątrz. Wystawienie portu `6001:80` w pliku `docker-compose.yml` realizuje mapowanie portów z hosta na kontener i umożliwia dostęp do interfejsu z poziomu przeglądarki użytkownika. Przypinanie phpMyAdmin do sieci `frontend` łamałoby zasady separacji warstw.
+
+**Sprawdzenie poprawności konfiguracji sieci:**
+
 `docker network inspect lab13_backend`
 <details>
 <summary>Wynik komendy:</summary>
@@ -205,6 +212,8 @@ e360095edbff   mysql:9.7.0                     "docker-entrypoint.s…"   11 min
 ```
 
 </details>
+
+Jak widać powyżej, do sieci backend zostały przyłączone: mysql, nginx, php, phpmyadmin. Natomiast do sieci frontend został przyłączony jednynie nginx.
 
 ### Potwierdzenie działania strony
 
