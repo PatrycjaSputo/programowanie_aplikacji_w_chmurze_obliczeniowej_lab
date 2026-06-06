@@ -21,7 +21,7 @@ MYSQL_DATABASE: ${MYSQL_DATABASE}
  ✔ Container lab13-php-1        Created 0.0s
  ✔ Container lab13-mysql-1      Created 0.0s
  ✔ Container lab13-phpmyadmin-1 Created 0.0s
- ✔ Container lab13-nginx-1      Created    
+ ✔ Container lab13-nginx-1      Created 0.0s
 ```
 
 </details>
@@ -233,6 +233,12 @@ Logowanie do phpmyadmin
 ![phpmyadmin](img/3.png)
 Phpmyadmin - użytkownik zalogowany.
 
+![phpmyadmin](img/8.png)
+Phpmyadmin - tworzenie bazy.
+
+![phpmyadmin](img/9.png)
+Phpmyadmin - nowa baza.
+
 ## Część dodatkowa
 
 Dodanie folderu `secrets/` i dodanie go do `.gitignore`.
@@ -294,6 +300,158 @@ Komenda zatrzymująca kontenery: `docker compose -f docker-compose-dodatkowe.yml
  ✔ Container lab13-mysql-1      Removed 0.7s
  ✔ Network lab13_frontend       Removed 0.1s
  ✔ Network lab13_backend        Removed 0.2s
+```
+
+</details>
+<br>
+
+### Potwierdzenie działania sieci po zmianach w docker-compose
+
+`docker network inspect lab13_backend`
+<details>
+<summary>Wynik komendy:</summary>
+
+```
+[
+    {
+        "Name": "lab13_backend",
+        "Id": "cba8592a2c36cb58b34a3aaaba268dd57dcefd9fbe224e1297f13dbbfa29b7dd",
+        "Created": "2026-06-06T13:45:30.189596894+02:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.28.0.0/16",
+                    "Gateway": "172.28.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Options": {},
+        "Labels": {
+            "com.docker.compose.config-hash": "303a5c6a665d112f4cfee901befcc7bb1f43b97b72bbbccd3bbe862f5d0e35b7",
+            "com.docker.compose.network": "backend",
+            "com.docker.compose.project": "lab13",
+            "com.docker.compose.version": "5.0.2"
+        },
+        "Containers": {
+            "023f8a0d223c04b7999d18f25dfdea637f9fb81e4b22ff4c4b6be5f3eab1929a": {
+                "Name": "lab13-phpmyadmin-1",
+                "EndpointID": "9028a63e1d30454f7b0d2a28b24a6e0d91a6c21b953aaada2b2f8689ea27b667",
+                "MacAddress": "5a:68:9a:62:d7:7a",
+                "IPv4Address": "172.28.0.5/16",
+                "IPv6Address": ""
+            },
+            "6220f7789d02778bb3452bd181d10ac588cbe96167457cbe3e94aea86960727a": {
+                "Name": "lab13-php-1",
+                "EndpointID": "2e409785a37eb7f1091ebb8d77dc180b4adedaabb2ce943cc24e6d61afaf79b1",
+                "MacAddress": "66:96:8d:16:7c:6b",
+                "IPv4Address": "172.28.0.2/16",
+                "IPv6Address": ""
+            },
+            "a5f0ccdadbfffde70ca8626effdd0e5aed939d0cb003c4cd43c16736b662be35": {
+                "Name": "lab13-nginx-1",
+                "EndpointID": "a9934699a6575f9f7381b7ffd46759a55c72222fdaf546bc4b3d0b3d24be1c88",
+                "MacAddress": "06:31:d4:0f:71:c9",
+                "IPv4Address": "172.28.0.4/16",
+                "IPv6Address": ""
+            },
+            "b44a6896cf8a1eb7adc54192407e4d3538e6d1b94a57046abbc409f4394f3799": {
+                "Name": "lab13-mysql-1",
+                "EndpointID": "0186e7216e0e26346e074e9731677e5b0a68de79f6dd99820a511d4e03eefeda",
+                "MacAddress": "e6:cc:ac:39:ec:06",
+                "IPv4Address": "172.28.0.3/16",
+                "IPv6Address": ""
+            }
+        },
+        "Status": {
+            "IPAM": {
+                "Subnets": {
+                    "172.28.0.0/16": {
+                        "IPsInUse": 7,
+                        "DynamicIPsAvailable": 65529
+                    }
+                }
+            }
+        }
+    }
+]
+```
+
+</details>
+<br>
+
+`docker network inspect lab13_frontend`
+
+<details>
+<summary>Wynik komendy:</summary>
+
+```
+[
+    {
+        "Name": "lab13_frontend",
+        "Id": "398ca04d5e6409560225af71874c5501417fe60c89b0f22e5e7646d5a2a0d326",
+        "Created": "2026-06-06T13:45:30.213639251+02:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.29.0.0/16",
+                    "Gateway": "172.29.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Options": {},
+        "Labels": {
+            "com.docker.compose.config-hash": "c99dfed360a6944db43f183a5bd3f4016b0c10584adeeaa2e535a0bc34386287",
+            "com.docker.compose.network": "frontend",
+            "com.docker.compose.project": "lab13",
+            "com.docker.compose.version": "5.0.2"
+        },
+        "Containers": {
+            "a5f0ccdadbfffde70ca8626effdd0e5aed939d0cb003c4cd43c16736b662be35": {
+                "Name": "lab13-nginx-1",
+                "EndpointID": "ec61d733757e70c7ee814f916fff440e8fe6dd3893794b523cb26c7c7227230e",
+                "MacAddress": "26:d4:c8:05:d2:fd",
+                "IPv4Address": "172.29.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Status": {
+            "IPAM": {
+                "Subnets": {
+                    "172.29.0.0/16": {
+                        "IPsInUse": 4,
+                        "DynamicIPsAvailable": 65532
+                    }
+                }
+            }
+        }
+    }
+]
 ```
 
 </details>
