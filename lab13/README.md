@@ -3,8 +3,13 @@ Zbudowanie prostego pliku docker-compose.yml, który pozwoli na uruchomienie sta
 ## Część obowiązkowa
 
 Początkowo (w części obowiązkowej zadania) dane wrażliwe zostały dodane do pliku .env.
+Odczyt z pliku .env w docker-compose.yml:
+```
+MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+MYSQL_DATABASE: ${MYSQL_DATABASE}
+```
 
-**Komenda uruchamiająca kontenery:** `docker compose up -d`.
+**Komenda uruchamiająca kontenery:** `docker compose up -d`
 
 <details>
 <summary>Wynik komendy:</summary>
@@ -22,7 +27,7 @@ Początkowo (w części obowiązkowej zadania) dane wrażliwe zostały dodane do
 </details>
 <br>
 
-**Komenda wyłączająca kontenery:** `docker compose down`.
+**Komenda wyłączająca kontenery:** `docker compose down`
 
 <details>
 <summary>Wynik komendy:</summary>
@@ -256,7 +261,56 @@ W `docker-compose.yml` zostały użyte secret'y w następujący sposób:
         MYSQL_DATABASE_FILE: /run/secrets/db_name
     ```
 
+### Potwierdzenie działania kontenerów po zmianach w docker-compose
 
+Komenda uruchamiająca: `docker compose -f docker-compose-dodatkowe.yml up -d`
 
+<details>
+<summary>Wynik komendy:</summary>
 
+```
+[+] up 6/6
+ ✔ Network lab13_backend        Created 0.0s
+ ✔ Network lab13_frontend       Created 0.0s
+ ✔ Container lab13-php-1        Created 0.0s
+ ✔ Container lab13-mysql-1      Created 0.0s
+ ✔ Container lab13-phpmyadmin-1 Created 0.0s
+ ✔ Container lab13-nginx-1      Created 0.0s
+```
 
+</details>
+<br>
+
+Komenda zatrzymująca kontenery: `docker compose -f docker-compose-dodatkowe.yml down`
+
+<details>
+<summary>Wynik komendy:</summary>
+
+```
+[+] down 6/6
+ ✔ Container lab13-phpmyadmin-1 Removed 1.2s
+ ✔ Container lab13-nginx-1      Removed 0.2s
+ ✔ Container lab13-php-1        Removed 0.1s
+ ✔ Container lab13-mysql-1      Removed 0.7s
+ ✔ Network lab13_frontend       Removed 0.1s
+ ✔ Network lab13_backend        Removed 0.2s
+```
+
+</details>
+<br>
+
+### Potwierdzenie działania strony po zmianach w docker-compose
+
+![strona](img/4.png)
+Strona index.php
+
+### Potwierdzenie działania phpmyadmin pod zmianach w docker-compose
+
+![strona](img/5.png)
+phpmyadmin - logowanie
+
+![strona](img/6.png)
+phpmyadmin - tworzenie bazy
+
+![strona](img/7.png)
+phpmyadmin - nowa baza
